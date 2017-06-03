@@ -130,8 +130,8 @@ plt.figure()
 markerSize = 10
 markerWidth = 1.5
 plt.plot(tuple(bestCornersHarris['location']['xcorr']), tuple(bestCornersHarris['location']['ycorr']), 'r+', markersize=markerSize, label='Harris Detector', markeredgewidth=markerWidth)
-plt.plot(tuple(bestCorners2['location']['xcorr']), tuple(bestCorners2['location']['ycorr']), 'gx', markersize=markerSize, label='Shi and Tomasi Dectecor', markeredgewidth=markerWidth)
-plt.plot(tuple(bestCorners3['location']['xcorr']), tuple(bestCorners3['location']['ycorr']), 'bo', markersize=5, label='Triggs Dectecor', markeredgewidth=markerWidth)
+plt.plot(tuple(bestCorners2['location']['xcorr']), tuple(bestCorners2['location']['ycorr']), 'gx', markersize=markerSize, label='Shi and Tomasi Detector', markeredgewidth=markerWidth)
+plt.plot(tuple(bestCorners3['location']['xcorr']), tuple(bestCorners3['location']['ycorr']), 'bo', markersize=5, label='Triggs Detector', markeredgewidth=markerWidth)
 
 plt.legend()
 plt.title(str(numberOfCorners) + ' best features')
