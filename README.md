@@ -8,4 +8,5 @@ Possible detectors:
 -	Shi and Tomasi
 -	Triggs
 -	Brown, Szeliski and Winder
+
 Tools: Python 3.5, OpenCV
