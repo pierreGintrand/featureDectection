@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 class FeatureDetector:
     """
-    This class calculates features points thanks to differents methods
+    This class calculates features points in differents methods
     """
     def __init__(self, fileName, numberOfCorners = 50, windowSize = 3):
         self.numberOfCorners = numberOfCorners
