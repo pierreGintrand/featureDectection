@@ -1,21 +1,14 @@
 # -*- coding: utf-8 -*-
 """
+main.py
 @author: Pierre
 """
 
 
-import matplotlib.pyplot as plt
-import numpy as np
-import cv2
-
 import FeatureDetector
 
 
-
 filename = 'pic/lena.jpg'
-filename = 'pic/cat.jpg'
-filename = 'pic/img_essai.png'
-
 
 
 numberOfCorners = 50
@@ -28,8 +21,3 @@ lenaFeatures.getTriggsCorners()
 lenaFeatures.getBrownCorners()
 
 lenaFeatures.display()
-
-#Display
-
-
-
