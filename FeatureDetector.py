@@ -57,11 +57,10 @@ class FeatureDetector:
         if not(self.shiTomasiCalculated):
             #calculate the response for each pixel (minimu eigenvalue)
             response = np.zeros((self.width,self.height))
-            for i in range(self.width):
-                for j in range(self.height):
-                    response[i,j] = np.min(np.linalg.eig(np.array([[self.A[i,j],self.C[i,j]],[self.C[i,j],self.B[i,j]]]))[0])
-            
-            corners = [((i,j),response[j,i]) for j in range(self.height) for i in range(self.width)]
+            for j in range(self.width):
+                for i in range(self.height):
+                    response[j,i] = np.min(np.linalg.eig(np.array([[self.A[i,j],self.C[i,j]],[self.C[i,j],self.B[i,j]]]))[0])
+            corners = [((i,j),response[i,j]) for j in range(self.height) for i in range(self.width)]
             dtype=[('location',[('xcorr',int),('ycorr',int)]),('response',float)]
             shiTomasiResponse = np.array(corners, dtype=dtype)
             self.shiTomasiCorners = self.getNBestCorners(shiTomasiResponse)
@@ -73,12 +72,12 @@ class FeatureDetector:
         if not(self.triggsCalculated):
             #calculate the response for each pixel 
             response = np.zeros((self.width,self.height))
-            for i in range(self.width):
-                for j in range(self.height):
+            for j in range(self.width):
+                for i in range(self.height):
                     eigVal = np.linalg.eig(np.array([[self.A[i,j],self.C[i,j]],[self.C[i,j],self.B[i,j]]]))[0]
-                    response[i,j] = np.min(eigVal) - k*np.max(eigVal)
+                    response[j,i] = np.min(eigVal) - k*np.max(eigVal)
             
-            corners = [((i,j),response[j,i]) for j in range(self.height) for i in range(self.width)]
+            corners = [((i,j),response[i,j]) for j in range(self.height) for i in range(self.width)]
             dtype=[('location',[('xcorr',int),('ycorr',int)]),('response',float)]
             triggsResponse = np.array(corners, dtype=dtype)
             self.triggsCorners = self.getNBestCorners(triggsResponse)
@@ -89,15 +88,15 @@ class FeatureDetector:
         if not(self.brownCalculated):
             #calculate the response for each pixel 
             response = np.zeros((self.width,self.height))
-            for i in range(self.width):
-                for j in range(self.height):
+            for j in range(self.width):
+                for i in range(self.height):
                     eigVal = np.linalg.eig(np.array([[self.A[i,j],self.C[i,j]],[self.C[i,j],self.B[i,j]]]))[0]
                     if (eigVal[0]+eigVal[1])==0:
-                        response[i,j] = 1 if eigVal[0]==eigVal[1] else -np.inf
+                        response[j,i] = 1 if eigVal[0]==eigVal[1] else -np.inf
                     else:
-                        response[i,j] = eigVal[0]*eigVal[1]/(eigVal[0]+eigVal[1])
+                        response[j,i] = eigVal[0]*eigVal[1]/(eigVal[0]+eigVal[1])
             
-            corners = [((i,j),response[j,i]) for j in range(self.height) for i in range(self.width)]
+            corners = [((i,j),response[i,j]) for j in range(self.height) for i in range(self.width)]
             dtype=[('location',[('xcorr',int),('ycorr',int)]),('response',float)]
             brownResponse = np.array(corners, dtype=dtype)
             self.brownCorners = self.getNBestCorners(brownResponse)
